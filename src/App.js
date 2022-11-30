@@ -1,56 +1,40 @@
 import Transaction from "./components/Transaction";
 import FormComponent from "./components/FormComponent";
 import './App.css'
-import {useEffect, useState} from "react"
-import DataContext from "./data/DataContext";
-import ReportComponent from "./components/reportComponent";
-import {BrowserRouter as Router,Route,Link,Routes} from "react-router-dom";
-
+import { useState} from "react"
+import Navbar from "./components/Navbar";
+import {BrowserRouter as Router,Route,Routes,Link} from "react-router-dom";
 //import { element } from "prop-types";
 function App() {
-  const design = {color:"red",textAlign:"center",fontSize:'1.5rem'}
-  const [items,setItems] = useState([])
-  const [reportIncome,setreportIncome] = useState(0)
-  const [reportExpense,setreportExpense] = useState(0)
+  const initState = [{Name:"Sahadsanai",Lname:"Poomprasert",Tel:"0965417466",Emailp:"sahadsanai1@gmail.com",Refp:"test"},
+  {Name:"Panadda",Lname:"Popum",Tel:"0987654321",Emailp:"panadda@gmail.com",Refp:"Test2"},]
+  const [items,setItems] = useState(initState)
   const onAddNewItem = (newItem)=>{
       setItems((prevItem)=>{
         return [newItem,...prevItem]
       })
   }
-  useEffect(()=>{
-      const amounts = items.map(items=>items.amount)
-      const income = amounts.filter(element=>element>0).reduce((total,element)=>total+=element,0)
-      const expense = (amounts.filter(element=>element<0).reduce((total,element)=>total+=element,0))*-1
-      setreportIncome(income.toFixed(2))
-      setreportExpense(expense.toFixed(2))
-  },[items,reportIncome,reportExpense])
+
   return (
-<DataContext.Provider value={
-  {
-    income :reportIncome,
-    expense :reportExpense
-  }
-}>
+    <div ><Navbar/>
 <div className="container">
-          <h1 style={design}>แอพบัญชีรายรับ - รายจ่าย</h1>
           <Router>
-          <div>
-            <ul className="horizontal-menu">
+          <ul className="horizontal-menu">
             <li>
-              <Link to="/">ข้อมูลบัญชี</Link>
+              <Link to="/">ข้อมูลผู้ลงทะเบียน</Link>
             </li>
             <li>
-              <Link to="/insert">บันทึกข้อมูล</Link>
+              <Link to="/insert">ลงทะเบียน</Link>
             </li>
             </ul>
+          <div>
             <Routes>
-              <Route path="/" element={<ReportComponent />} />
+            <Route path="/" element={<Transaction items={items} />} />
               <Route
                 path="/insert"
                 element={
                   <>
                     <FormComponent onAddItem={onAddNewItem} />
-                    <Transaction items={items} />
                   </>
                 }
               />
@@ -58,7 +42,7 @@ function App() {
           </div>
           </Router>
       </div>  
-</DataContext.Provider>
+      </div>
   );
 }
 

@@ -1,0 +1,29 @@
+.n-wrapper {
+    height: 4rem;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    top: 0;
+    padding: 1.25rem;
+    position: relative;
+    background-color: rgb(243, 112, 112);
+  }
+
+  .n-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    background-color: rgb(243, 112, 112);
+  }
+  @media screen and (max-width: 600px) and (min-width: 480px) {
+    .n-name {
+      font-size: 1.2rem;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .n-name {
+      font-size: 0.8rem;
+    }
+    .n-wrapper {
+      height: 3.5rem;
+    }
+  }
