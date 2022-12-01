@@ -32,7 +32,6 @@ const FormComponent = (props)=>{
             Tel:Number(Tel),
             Emailp:Emailp,
             Refp:Refp,
-            Url :window.location.href,
         }
         props.onAddItem(itemData)
         setName('') 
@@ -60,15 +59,15 @@ const FormComponent = (props)=>{
                 </div>
                 <div >
                     <label ><b>นามสกุล</b></label>
-                    <input  name='LName' type="text" placeholder="นามสกุล" onChange={inputLname} value={Lname}/>
+                    <input  name='LName' type="text" placeholder="นามสกุล" onChange={inputLname} value={Lname}  required/>
                 </div>
                 <div>
                     <label ><b>เบอร์โทรศัพท์</b></label>
-                    <input  name='TEL'type="number" placeholder="+66xxx-xxx-xxx" onChange={inputTel} value={Tel}/>
+                    <input  name='TEL'type="number" placeholder="+66xxx-xxx-xxx" onChange={inputTel} value={Tel}  required/>
                 </div> 
                 <div>
                     <label><b>อีเมล</b></label>
-                    <input name='Emailp'type="email" placeholder="@" onChange={inputEmailp} value={Emailp}/>
+                    <input name='Emailp'type="email" placeholder="@" onChange={inputEmailp} value={Emailp}  required/>
                 </div>
                 <div >
                     <label><b>ref</b></label>
