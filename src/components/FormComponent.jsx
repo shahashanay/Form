@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './FormComponent.css'
 import { v4 as uuidv4 } from 'uuid'
 const FormComponent = (props)=>{
@@ -7,7 +7,7 @@ const FormComponent = (props)=>{
     const [Tel,setTel] = useState('')
     const [Emailp,setEmailp] = useState('')
     const [Refp,setRefp] = useState('')
-    const [formvalid,setFormValid]= useState(false)
+
     const inputName = (event)=>{
         setName(event.target.value)
     }
@@ -31,7 +31,8 @@ const FormComponent = (props)=>{
             Lname:Lname,
             Tel:Number(Tel),
             Emailp:Emailp,
-            Refp:Refp
+            Refp:Refp,
+            Url :window.location.href,
         }
         props.onAddItem(itemData)
         setName('') 
@@ -40,40 +41,46 @@ const FormComponent = (props)=>{
         setEmailp('')
         setRefp('')
     }
+    const Dtime = () =>{
+        const [message, setMessage]= useState()
     useEffect(()=>{
-        const checkData = Name.trim().length>0 && Tel!==0 && Lname.trim().length>0 && Emailp.trim().length>0 
-            setFormValid(checkData)
-    })
+        console.log('test');
+        setTimeout(()=>{
+           setMessage= saveItem(true)
+        },1000)
+    },[]);
+    return {message}};
+
     return(
         <div ><h1 className='design'>แบบฟอร์มลงทะเบียน</h1>
-            
             <form onSubmit={saveItem}>
                 <div >
                     <label ><b>ชื่อ</b></label>
-                    <input className='' type="text" placeholder="ชื่อ" onChange={inputName} value={Name}/>
+                    <input  name='Name' type="text" placeholder="ชื่อ" onChange={inputName} value={Name} required/>
                 </div>
                 <div >
-                    <label><b>นามสกุล</b></label>
-                    <input type="text" placeholder="นามสกุล" onChange={inputLname} value={Lname}/>
+                    <label ><b>นามสกุล</b></label>
+                    <input  name='LName' type="text" placeholder="นามสกุล" onChange={inputLname} value={Lname}/>
                 </div>
                 <div>
-                    <label><b>เบอร์โทรศัพท์</b></label>
-                    <input type="number" placeholder="+66xxx-xxx-xxx" onChange={inputTel} value={Tel}/>
-                </div>
+                    <label ><b>เบอร์โทรศัพท์</b></label>
+                    <input  name='TEL'type="number" placeholder="+66xxx-xxx-xxx" onChange={inputTel} value={Tel}/>
+                </div> 
                 <div>
                     <label><b>อีเมล</b></label>
-                    <input type="email" placeholder="@" onChange={inputEmailp} value={Emailp}/>
+                    <input name='Emailp'type="email" placeholder="@" onChange={inputEmailp} value={Emailp}/>
                 </div>
                 <div >
                     <label><b>ref</b></label>
-                    <input type="text" placeholder="" onChange={inputRefp} value={Refp}/>
-                </div>
+                    <input name='Refp' type="text" placeholder="" onChange={inputRefp} value={Refp}/>
+                </div> 
                 <div>
-                    <button type="submit" className="btn" disabled={!formvalid}>ลงทะเบียน</button>
+                    <button type="Submit" className="btn"  >ลงทะเบียน</button>
                 </div>
             </form>
         </div>
-    )
-}
 
+        
+    );
+}
 export default FormComponent
